@@ -10,7 +10,7 @@ class ConnectBD:
       host="localhost",
       database="studyplan",
       user="postgres",
-      password="Lu274235Ely5"
+      password="postgres"
     )
 
   # Utilizado o classMethod para ser possível criar um atributo metodo da classe
