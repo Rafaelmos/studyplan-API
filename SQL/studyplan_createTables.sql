@@ -2,7 +2,7 @@ create table if not exists Usuario(
 	id serial primary key,
 	nome varchar(255) not null unique,
 	senha varchar(30) not null,
-idade integer
+	idade integer
 );
 
 create table if not exists Agenda(
