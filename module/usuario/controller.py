@@ -12,9 +12,11 @@ app_name = "usuario"
 dao = UsuarioDao(connectDataBase=ConnectDataBase())
 
 # Rota para listar todos os usuarios
-@app_usuario.route('/{}s/'.format(app_name))
+@app_usuario.route('/{}s/'.format(app_name), methods=['GET'])
 def getAll_Usuarios():
-  return 'Todos os Usuarios cadastrados'
+  usuarios = dao.get_allUsers()
+
+  return make_response(jsonify(usuarios), 200)
 
 
 # Rota para listar apenas um usuario
