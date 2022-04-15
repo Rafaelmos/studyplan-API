@@ -1,6 +1,6 @@
 import psycopg2
 
-class ConnectBD:
+class ConnectDataBase:
 
   _instace = None
 
@@ -15,18 +15,23 @@ class ConnectBD:
 
   # Utilizado o classMethod para ser possível criar um atributo metodo da classe
   # Para não criar várias instancias do mesmo Objeto quando se for fazer uma conexão no banco
+  '''
   @classmethod
   def get_connect(cls):
     if cls._instace is None:
       cls._instace = super().__new__(cls)
     
     return cls._instace
-  
   '''
+
   # Outra forma de fazer o Singleton - Sobreescrevendo o método __new__()
   def __new__(cls, *args, **kwargs):
     if cls._instace is None:
       cls._instace = super().__new__(cls)
     
     return cls._instace
-  '''
+
+  @property
+  def connect(self):
+    return self._connect
+
