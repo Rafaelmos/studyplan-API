@@ -31,9 +31,12 @@ create table if not exists Lembretes(
 	nome varchar(255),
 	descricao varchar(255),
 	data timestamp,
-	foreign key(id) references agenda(id),
-	foreign key(id) references usuario(id)
+	agenda_id integer,
+	usuario_id integer,
+  FOREIGN KEY(agenda_id) REFERENCES Agenda(id),
+  FOREIGN KEY(usuario_id) REFERENCES Usuario(id)
 );
+
 
 create table if not exists Metas(
 	id serial primary key,
