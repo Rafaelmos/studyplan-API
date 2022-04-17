@@ -20,9 +20,12 @@ def getAll_Usuarios():
 
 
 # Rota para listar apenas um usuario
-@app_usuario.route('/{}/nome/'.format(app_name))
+@app_usuario.route('/{}/nome/'.format(app_name), methods=['POST'])
 def get_Usuario():
-  return 'Um unico usuario'
+  data = request.form.to_dict(flat=True)
+  print(data['nome'])
+  dados_usuario = dao.get_user(data['nome'])
+  return make_response(dados_usuario, 200)
 
 
 # Rota para adicionaar novos usuarios
