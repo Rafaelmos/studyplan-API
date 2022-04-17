@@ -1,7 +1,8 @@
 import psycopg2
 
 SCRIPT_SQL_INSERT = 'INSERT INTO USUARIO(nome, senha, idade) values(%s, %s, %s) returning id'
-SCRIPT_SQL_SELECT = 'SELECT * FROM USUARIO'
+SCRIPT_SQL_SELECT_ALL = 'SELECT * FROM USUARIO'
+SCRIPT_SQL_SELECT_USER = 'SELECT id, nome, senha, idade FROM USUARIO WHERE nome = {}'
 
 
 class UsuarioDao:
@@ -22,7 +23,7 @@ class UsuarioDao:
   def get_allUsers(self):
     usuarios = []
     cursor = self.connectDataBase.connect.cursor()
-    cursor.execute(SCRIPT_SQL_SELECT)
+    cursor.execute(SCRIPT_SQL_SELECT_ALL)
     columns_name = [column[0] for column in cursor.description]
     usuario_cursor = cursor.fetchone()
     while usuario_cursor:
@@ -32,3 +33,10 @@ class UsuarioDao:
     cursor.close()
 
     return usuarios
+
+  def get_user(self, nome_Usuario):
+    cursor = self.connectDataBase.connect.cursor()
+    cursor.execute(SCRIPT_SQL_SELECT_USER.format(nome_Usuario))
+    self.connectDataBase.connect.commit()
+    cursor.close()
+    return nome_Usuario
