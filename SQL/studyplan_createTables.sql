@@ -1,56 +1,63 @@
-create table if not exists Usuario(
+create table if not exists usuario(
 	id serial primary key,
 	nome varchar(255) not null unique,
 	senha varchar(30) not null,
 	idade integer
 );
 
-create table if not exists Agenda(
+create table if not exists agenda(
 	id serial primary key,
-	foreign key(id) references usuario(id)
+	usuario_id integer,
+	foreign key(usuario_id) references usuario(id)
 );
 
-create table if not exists CronogramaDeMaterias(
+create table if not exists cronogramadematerias(
 	id serial primary key,
 	materia varchar(20),
 	descricao varchar(255),
 	data timestamp,
-	foreign key(id) references agenda(id),
-	foreign key(id) references usuario(id)
+	agenda_id integer,
+	usuario_id integer,
+  foreign key(agenda_id) references agenda(id),
+  foreign key(usuario_id) references usuario(id)
 );
 
-create table if not exists Materias(
+create table if not exists materias(
 	id serial primary key,
 	materia varchar(20),
 	area varchar(20),
-	foreign key(id) references cronogramadematerias(id)
+	cronogramadematerias_id integer,
+	foreign key(cronogramadematerias_id) references cronogramadematerias(id)
 );
 
-create table if not exists Lembretes(
+create table if not exists lembretes(
 	id serial primary key,
 	nome varchar(255),
 	descricao varchar(255),
 	data timestamp,
 	agenda_id integer,
 	usuario_id integer,
-  FOREIGN KEY(agenda_id) REFERENCES Agenda(id),
-  FOREIGN KEY(usuario_id) REFERENCES Usuario(id)
+  foreign key(agenda_id) references agenda(id),
+  foreign key(usuario_id) references usuario(id)
 );
 
 
-create table if not exists Metas(
+create table if not exists metas(
 	id serial primary key,
 	nome varchar(255),
 	descricao varchar(255),
 	status float,
 	prazo timestamp,
-	foreign key(id) references agenda(id),
-	foreign key(id) references usuario(id)
+	agenda_id integer,
+	usuario_id integer,
+  foreign key(agenda_id) references agenda(id),
+  foreign key(usuario_id) references usuario(id)
 );
 
-create table if not exists LinksUteis(
+create table if not exists linksuteis(
 	id serial primary key,
 	titulo varchar(50),
 	link varchar(255),
-	foreign key(id) references usuario(id)
+	usuario_id integer,
+  foreign key(usuario_id) references usuario(id)
 );
