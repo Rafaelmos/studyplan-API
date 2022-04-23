@@ -2,6 +2,9 @@ import psycopg2
 
 SCRIPT_SQL_INSERT = 'INSERT INTO AGENDA(usuario_id) values(%s) returning id'
 SCRIPT_SQL_SELECT_ALL_AGENDAS = 'SELECT * FROM AGENDAS'
+#SELECT * FROM  cronogramadematerias as z WHERE z.agenda_id= 1
+#SELECT * FROM  metas as x WHERE x.agenda_id= 1
+#SELECT * FROM  lembretes as y WHERE y.agenda_id= 1
 
 class AgendaDao:
   def __init__(self, connectDataBase):
