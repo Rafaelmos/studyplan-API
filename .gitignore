@@ -1,3 +1,10 @@
-connect/__pycache__/
 
+__pycache__
+connect/__pycache__/
+module/agenda/__pycache__
+module/lembrete/__pycache__
+module/materias/__pycache__
+module/metas/__pycache__
 module/usuario/__pycache__
+module/linksuteis/__pycache__
+module/cronogramadematerias/__pycache__ 
