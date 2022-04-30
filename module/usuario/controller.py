@@ -19,14 +19,34 @@ def getAll_Usuarios():
   return make_response(jsonify(usuarios), 200)
 
 
-# Rota para listar apenas um usuario
-@app_usuario.route('/{}/nome/'.format(app_name), methods=['POST'])
-def get_Usuario():
-  data = request.form.to_dict(flat=True)
-  print(data['nome'])
-  dados_usuario = dao.get_user(data['nome'])
-  return make_response(dados_usuario, 200)
+# Rota para listar apenas um usuario: Pesquisando pelo nome
+@app_usuario.route('/{}/<string:nome>'.format(app_name), methods=['GET'])
+def get_usuario_for_name(nome):
+  usuarios = dao.get_allUsers()
+  for usuario in usuarios:
+    if usuario['nome'] == nome:
+      return make_response(jsonify(usuario), 200)
 
+  return make_response(
+    {
+      'error': True,
+      'message': 'Usuario não encontrado'
+    }, 404)
+
+# Rota para listar apenas um usuario: Pesquisando por um ID
+@app_usuario.route('/{}/<int:id>'.format(app_name), methods=['GET'])
+def get_usuario_by_id(id):
+  usuarios = dao.get_allUsers()
+
+  for usuario in usuarios:
+    if usuario['id'] == id:
+      return make_response(jsonify(usuario), 200)
+
+  return make_response(
+    {
+      'error': True,
+      'message': 'Usuario foi encontrado'
+    }, 404)
 
 # Rota para adicionaar novos usuarios
 @app_usuario.route('/{}/adicionar/'.format(app_name), methods=['POST'])
@@ -45,6 +65,11 @@ def add_Usuario():
       }, 400)
 
   return make_response({'id': usuario.id}, 201)
+
+# Rota para Atualizar dados de um usuario
+@app_usuario.route('/{}/atualizar/<int:id>'.format(app_name), methods=['PUT'])
+def update_usuario():
+  pass
 
 # Rota para deletar algum usuario
 @app_usuario.route('/{}/delete/'.format(app_name))

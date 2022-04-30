@@ -2,8 +2,7 @@ import psycopg2
 
 SCRIPT_SQL_INSERT = 'INSERT INTO USUARIO(nome, senha, idade) values(%s, %s, %s) returning id'
 SCRIPT_SQL_SELECT_ALL = 'SELECT * FROM USUARIO'
-SCRIPT_SQL_SELECT_USER = 'SELECT id, nome, senha, idade FROM USUARIO WHERE nome = {}'
-
+#SCRIPT_SQL_SELECT_USER = 'SELECT id, nome, senha, idade FROM USUARIO WHERE id = {}'
 
 class UsuarioDao:
   def __init__(self, connectDataBase):
@@ -34,9 +33,19 @@ class UsuarioDao:
 
     return usuarios
 
-  def get_user(self, nome_Usuario):
+''' Não foi necessário utilizar essa função
+
+  def get_user_id(self, id):
+    date_usuario = []
     cursor = self.connectDataBase.connect.cursor()
-    cursor.execute(SCRIPT_SQL_SELECT_USER.format(nome_Usuario))
+    cursor.execute(SCRIPT_SQL_SELECT_USER.format(id))
     self.connectDataBase.connect.commit()
+    columns_name = [column[0] for column in cursor.description]
+    usuario_cursor = cursor.fetchone()
+    while usuario_cursor:
+      usuario = dict(zip(columns_name, usuario_cursor))
+      usuario_cursor = cursor.fetchone()
+      date_usuario.append(usuario)
     cursor.close()
-    return nome_Usuario
+    return date_usuario
+'''
