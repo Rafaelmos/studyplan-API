@@ -71,7 +71,13 @@ def add_Usuario():
 def update_usuario():
   pass
 
-# Rota para deletar algum usuario
+# Rota para deletar algum usuario 
+"""
 @app_usuario.route('/{}/delete/'.format(app_name))
-def delete_Usuario():
-  return 'Deletando Usuario'
+def delete_Usuario(self):
+  id = request.session(id)
+  if (dao.delete_user(id = id)):
+    return "Usuario deletado"
+  else:
+    return "Usuario não encontrado"
+"""

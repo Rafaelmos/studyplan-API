@@ -3,6 +3,7 @@ import psycopg2
 SCRIPT_SQL_INSERT = 'INSERT INTO USUARIO(nome, senha, idade) values(%s, %s, %s) returning id'
 SCRIPT_SQL_SELECT_ALL = 'SELECT * FROM USUARIO'
 #SCRIPT_SQL_SELECT_USER = 'SELECT id, nome, senha, idade FROM USUARIO WHERE id = {}'
+SCRIPT_SQL_DELETE_ID = 'DELETE FROM USUARIO WHERE id={}'
 
 class UsuarioDao:
   def __init__(self, connectDataBase):
@@ -15,7 +16,6 @@ class UsuarioDao:
     self.connectDataBase.connect.commit()
     cursor.close()
     usuario.set_id(id)
-
     return usuario
   
 
@@ -30,9 +30,15 @@ class UsuarioDao:
       usuario_cursor = cursor.fetchone()
       usuarios.append(usuario)
     cursor.close()
-
     return usuarios
+"""
+  def delete_user(self, id):
+    cursor = self.database.connect.cursor()
+    cursor.execute(SCRIPT_SQL_DELETE_ID.format(id))
+    cursor.close()
+    return self.get_allUsers
 
+"""
 ''' Não foi necessário utilizar essa função
 
   def get_user_id(self, id):
