@@ -31,14 +31,14 @@ class UsuarioDao:
       usuarios.append(usuario)
     cursor.close()
     return usuarios
-"""
+
   def delete_user(self, id):
     cursor = self.database.connect.cursor()
     cursor.execute(SCRIPT_SQL_DELETE_ID.format(id))
     cursor.close()
-    return self.get_allUsers
+    return 
 
-"""
+
 ''' Não foi necessário utilizar essa função
 
   def get_user_id(self, id):

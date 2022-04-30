@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Blueprint, jsonify, request, make_response, Response
 from connect.bdutil import ConnectDataBase
 
@@ -72,12 +73,9 @@ def update_usuario():
   pass
 
 # Rota para deletar algum usuario 
-"""
-@app_usuario.route('/{}/delete/'.format(app_name))
-def delete_Usuario(self):
-  id = request.session(id)
-  if (dao.delete_user(id = id)):
-    return "Usuario deletado"
-  else:
-    return "Usuario não encontrado"
-"""
+
+@app_usuario.route('/{}/delete/<int:id>'.format(app_name), methods=['DELETE'])
+def delete_Usuario(id):
+    deletar_usuario= dao.delete_user(id)
+    return (jsonify({"mensage": "Deletado"}) , 204)
+  
