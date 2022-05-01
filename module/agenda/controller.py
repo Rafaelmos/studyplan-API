@@ -32,3 +32,9 @@ def add_agenda():
         'mensagem': 'Verifique se todos os campos foram preenchidos corretamente'
       }, 400)
   return make_response({'id': agenda.id}, 200)
+  
+
+@app_agenda.route('/{}/<int:id>'.format(app_name))
+def getAll_by_agenda_id(id):
+  agenda = dao.getAll_by_agenda_id(id)
+  return make_response(jsonify(agenda), 200)
