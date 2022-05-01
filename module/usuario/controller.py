@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Blueprint, jsonify, request, make_response, Response
 from connect.bdutil import ConnectDataBase
 
