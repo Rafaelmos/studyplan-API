@@ -11,10 +11,10 @@
 
 ## 🚀 Tecnologias:
 Esse projeto foi desenvolvido com as seguintes tecnologias:
- - PYTHON <img src="https://user-images.githubusercontent.com/55465916/166394012-1e8aadba-7973-45c5-9135-da16c25ee2cc.png")>
- - Postgres SQL 📚
- - Flask
- - Psycopg2
+ - PYTHON <img src="https://user-images.githubusercontent.com/55465916/166395642-0444a019-c2cd-4a76-b7d6-0cbb941bad85.png" width="27px">
+ - Postgres SQL <img src="https://img.icons8.com/color/344/postgreesql.png" width="25px">
+ - Flask <img src="https://img.icons8.com/ios-filled/344/flask.png" width="25px">
+ - Psycopg2 <img src="https://img.icons8.com/color-glass/344/stackoverflow.png" width="25px">
 
 ## 🎯 Version das Bibliotecas utilizadas no momento:
 Flask==2.1.1
