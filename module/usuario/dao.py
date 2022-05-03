@@ -1,9 +1,9 @@
 import psycopg2
 
-SCRIPT_SQL_INSERT = 'INSERT INTO USUARIO(nome, senha, idade) values(%s, %s, %s) returning id'
-SCRIPT_SQL_SELECT_ALL = 'SELECT * FROM USUARIO'
-#SCRIPT_SQL_SELECT_USER = 'SELECT id, nome, senha, idade FROM USUARIO WHERE id = {}'
-SCRIPT_SQL_DELETE_ID = 'DELETE FROM USUARIO WHERE id = {}'
+SCRIPT_SQL_INSERT = 'INSERT INTO usuario(nome, senha, idade) values(%s, %s, %s) returning id'
+SCRIPT_SQL_SELECT_ALL = 'SELECT * FROM usuario'
+SCRIPT_SQL_UPDATE_USER = """UPDATE usuario SET nome = '{}', senha = '{}', idade = {} WHERE id = {}"""
+SCRIPT_SQL_DELETE_ID = 'DELETE FROM usuario WHERE id = {}'
 
 class UsuarioDao:
   def __init__(self, connectDataBase):
@@ -31,6 +31,12 @@ class UsuarioDao:
       usuarios.append(usuario)
     cursor.close()
     return usuarios
+
+  def updade_user(self, usuario_update, id):
+    cursor = self.connectDataBase.connect.cursor()
+    cursor.execute(SCRIPT_SQL_UPDATE_USER.format(usuario_update.get_values_save()[0], usuario_update.get_values_save()[1], usuario_update.get_values_save()[2], id))
+    self.connectDataBase.connect.commit()
+    cursor.close()
 
   def delete_user(self, id):
     cursor = self.connectDataBase.connect.cursor()

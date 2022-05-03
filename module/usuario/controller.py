@@ -68,9 +68,30 @@ def add_Usuario():
 
 # Rota para Atualizar dados de um usuario
 @app_usuario.route('/{}/atualizar/<int:id>'.format(app_name), methods=['PUT'])
-def update_usuario():
-  pass
-
+def update_usuario(id):
+  data = request.form.to_dict(flat=True)
+  get_all_usuarios = dao.get_allUsers()
+  
+  try:
+    usuario_update = Usuario(**data)
+    for usuario in get_all_usuarios:
+      if usuario['id'] == id:
+        dao.updade_user(usuario_update, id)
+        return make_response({'message' : 'Dados Atualizados'}, 200)
+    
+    return make_response(
+      {
+        'error' : True,
+        'message' : 'Error, Usuário não encontrado'
+      }, 404)
+  
+  except Exception as e:
+    print(traceback.format_exc())
+    return make_response(
+      {
+        'error' : True,
+        'message' : 'Erro, Verifique se os campos foram preenchidos corretamente'
+      }, 400)
 
 # Rota para deletar algum usuario
 @app_usuario.route('/{}/delete/<int:id>'.format(app_name), methods=['DELETE'])
