@@ -71,10 +71,22 @@ def add_Usuario():
 def update_usuario():
   pass
 
-# Rota para deletar algum usuario 
 
+# Rota para deletar algum usuario
 @app_usuario.route('/{}/delete/<int:id>'.format(app_name), methods=['DELETE'])
 def delete_Usuario(id):
-    deletar_usuario= dao.delete_user(id)
-    return (jsonify({"mensage": "Deletado"}) , 204)
-  
+  get_all_usuarios = dao.get_allUsers()
+
+  for usuario in get_all_usuarios:
+    if usuario['id'] == id:
+      dao.delete_user(id)
+      return make_response(
+      { 
+        'message' : 'Usuario ' + usuario['nome'] + ' Deletado' 
+      }, 200)
+
+  return make_response(
+    {
+      'error' : True,
+      'message' : 'Erro, O usuario não foi encontrado'
+    }, 400)
