@@ -22,6 +22,6 @@ psycopg2==2.9.3
 
 ## 🎓 Cuso:
  - Bacharelado em Sistemas de Informações.
- - UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO - UAST - Serra Talhada.
+ - UFRPE (UAST) - Serra Talhada.
  - Professor: Heldon José Oliveira
  - 4º Período.
