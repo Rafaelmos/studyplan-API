@@ -21,7 +21,7 @@ Flask==2.1.1
 psycopg2==2.9.3
 
 ## 🎓 Cuso:
- - Sistemas de Informações.
- - UAST - Serra Talhada.
- - Professo: Heldon José Oliveira
+ - Bacharelado em Sistemas de Informações.
+ - UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO - UAST - Serra Talhada.
+ - Professor: Heldon José Oliveira
  - 4º Período.
