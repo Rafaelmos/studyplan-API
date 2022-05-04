@@ -2,6 +2,8 @@ import psycopg2
 
 SCRIPT_SQL_INSERT = 'INSERT INTO LINKSUTEIS(titulo, link, usuario_id) values(%s, %s, %s) returning id'
 SCRIPT_SQL_SELECT_ALL_LINKS = 'SELECT * FROM LINKSUTEIS'
+SCRIPT_SQL_DELETE_ID = 'DELETE FROM LINKSUTEIS WHERE id = {}'
+
 
 class LinksDao:
   def __init__(self, connectDataBase):
@@ -30,3 +32,9 @@ class LinksDao:
     cursor.close()
 
     return links
+
+  def delete_link(self, id):
+      cursor = self.connectDataBase.connect.cursor()
+      cursor.execute(SCRIPT_SQL_DELETE_ID.format(id))
+      self.connectDataBase.connect.commit()
+      cursor.close()

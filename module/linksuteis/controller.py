@@ -33,3 +33,22 @@ def add_link():
         'mensagem': 'Verifique se todos os campos foram preenchidos corretamente'
       }, 400)
   return make_response({'id': link.id}, 200)
+
+
+@app_links.route('/{}/delete/<int:id>'.format(app_name), methods=['DELETE'])
+def delete_Link(id):
+  get_all_links = dao.getAll_links()
+
+  for link in get_all_links:
+    if link['id'] == id:
+      dao.delete_link(id)
+      return make_response(
+      { 
+        'message' : 'LinkUtil ' + link['nome'] + ' Deletado' 
+      }, 200)
+
+  return make_response(
+    {
+      'error' : True,
+      'message' : 'Erro, O LinkUtil não foi encontrado'
+    }, 400)
