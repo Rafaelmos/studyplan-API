@@ -33,3 +33,21 @@ def add_cronogramas():
         'mensagem': 'Verifique se todos os campos foram preenchidos corretamente'
       }, 400)
   return make_response({'id': cronograma.id}, 200)
+
+@app_cronogramas.route('/{}/delete/<int:id>'.format(app_name), methods=['DELETE'])
+def delete_cronograma(id):
+  get_all_cronograma = dao.getAll_cronogramas()
+
+  for cronograma in get_all_cronograma:
+    if cronograma['id'] == id:
+      dao.delete_cronograma(id)
+      return make_response(
+      { 
+        'message' : 'Cronograma ' + cronograma['materia'] + ' Deletado' 
+      }, 200)
+
+  return make_response(
+    {
+      'error' : True,
+      'message' : 'Erro, O Cronograma não foi encontrado'
+    }, 400)
