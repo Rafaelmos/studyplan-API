@@ -38,3 +38,22 @@ def add_agenda():
 def getAll_by_agenda_id(id):
   agenda = dao.getAll_by_agenda_id(id)
   return make_response(jsonify(agenda), 200)
+
+
+@app_agenda.route('/{}/delete/<int:id>'.format(app_name), methods=['DELETE'])
+def delete_agenda(id):
+  get_all_agendas = dao.getAll_agendas()
+
+  for agenda in get_all_agendas:
+    if agenda['id'] == id:
+      dao.delete_agenda(id)
+      return make_response(
+      { 
+        'message' : 'Agenda ' + agenda['id'] + ' Deletado' 
+      }, 200)
+
+  return make_response(
+    {
+      'error' : True,
+      'message' : 'Erro, A Agenda não foi encontrada'
+    }, 400)

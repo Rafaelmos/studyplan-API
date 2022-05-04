@@ -6,6 +6,8 @@ SCRIPT_SQL_SELECT_ALL_AGENDAS = 'SELECT * FROM AGENDA'
 SCRIPT_SQL_SELECT_LEMBRETES_BY_AGENDA_ID = 'SELECT * FROM  lembretes as y WHERE y.agenda_id= {}'
 SCRIPT_SQL_SELECT_METAS_BY_AGENDA_ID =  'SELECT * FROM  metas as x WHERE x.agenda_id= {}'
 SCRIPT_SQL_SELECT_CRONOGRAMA_BY_AGENDA_ID = 'SELECT * FROM  cronogramadematerias as z WHERE z.agenda_id= {}'
+SCRIPT_SQL_DELETE_ID = 'DELETE FROM CRONOGRAMADEMATERIAS WHERE id = {}'
+
 
 
 class AgendaDao:
@@ -64,3 +66,9 @@ class AgendaDao:
       agendabyid.append(agenda)
     cursor.close()
     return agendabyid
+
+  def delete_agenda(self, id):
+    cursor = self.connectDataBase.connect.cursor()
+    cursor.execute(SCRIPT_SQL_DELETE_ID.format(id))
+    self.connectDataBase.connect.commit()
+    cursor.close()
