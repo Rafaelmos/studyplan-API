@@ -33,3 +33,21 @@ def add_materia():
                 'mensagem': 'Verifique se todos os campos foram preenchidos corretamente'
             }, 400)
     return make_response({'id': materia.id}, 200)
+
+@app_materias.route('/{}/delete/<int:id>'.format(app_name), methods=['DELETE'])
+def delete_materia(id):
+  get_all_materias = dao.getAll_Materias()
+
+  for materia in get_all_materias:
+    if materia['id'] == id:
+      dao.delete_materia(id)
+      return make_response(
+      { 
+        'message' : 'Materia ' + materia['materia'] + ' Deletado' 
+      }, 200)
+
+  return make_response(
+    {
+      'error' : True,
+      'message' : 'Erro, A materia não foi encontrada'
+    }, 400)    

@@ -2,6 +2,8 @@ import psycopg2
 
 SCRIPT_SQL_INSERT = 'INSERT INTO MATERIAS(materia, area) values(%s, %s) returning id'
 SCRIPT_SQL_SELECT_ALL_MATERIAS = 'SELECT * FROM MATERIAS'
+SCRIPT_SQL_DELETE_ID = 'DELETE FROM MATERIAS WHERE id = {}'
+
 
 
 class MateriaDao:
@@ -30,5 +32,10 @@ class MateriaDao:
             metas.append(meta)
         cursor.close()
         return metas
-        
+
+    def delete_materia(self, id):
+        cursor = self.connectDataBase.connect.cursor()
+        cursor.execute(SCRIPT_SQL_DELETE_ID.format(id))
+        self.connectDataBase.connect.commit()
+        cursor.close()
 
