@@ -33,3 +33,21 @@ def add_lembrete():
         'mensagem': 'Verifique se todos os campos foram preenchidos corretamente'
       }, 400)
   return make_response({'id': lembrete.id}, 200)
+
+@app_lembretes.route('/{}/delete/<int:id>'.format(app_name), methods=['DELETE'])
+def delete_lembrete(id):
+  get_all_lembretes = dao.getAll_lembretes()
+
+  for lembrete in get_all_lembretes:
+    if lembrete['id'] == id:
+      dao.delete_lembrete(id)
+      return make_response(
+      { 
+        'message' : 'Lembrete ' + lembrete['nome'] + ' Deletado' 
+      }, 200)
+
+  return make_response(
+    {
+      'error' : True,
+      'message' : 'Erro, O Lembrete não foi encontrado'
+    }, 400)
