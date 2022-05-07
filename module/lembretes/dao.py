@@ -3,7 +3,7 @@ import psycopg2
 SCRIPT_SQL_INSERT = 'INSERT INTO LEMBRETES(nome, descricao, data, agenda_id, usuario_id) values(%s, %s, %s, %s, %s) returning id'
 SCRIPT_SQL_SELECT_ALL_LEMBRETES = 'SELECT * FROM LEMBRETES'
 SCRIPT_SQL_DELETE_ID = 'DELETE FROM LEMBRETES WHERE id = {}'
-
+SCRIPT_SQUL_SELECT_LEMBRETES_BY_ID = 'SELECT * FROM lembretes WHERE usuario_id = {}'
 
 class LembreteDao:
   def __init__(self, connectDataBase):
@@ -23,6 +23,19 @@ class LembreteDao:
     lembretes = []
     cursor = self.connectDataBase.connect.cursor()
     cursor.execute(SCRIPT_SQL_SELECT_ALL_LEMBRETES)
+    columns_name = [column[0] for column in cursor.description]
+    lembrete_cursor = cursor.fetchone()
+    while lembrete_cursor:
+      lembrete = dict(zip(columns_name, lembrete_cursor))
+      lembrete_cursor = cursor.fetchone()
+      lembretes.append(lembrete)
+    cursor.close()
+    return lembretes
+
+  def get_lembretes_by_id(self, usuario_id):
+    lembretes = []
+    cursor = self.connectDataBase.connect.cursor()
+    cursor.execute(SCRIPT_SQUL_SELECT_LEMBRETES_BY_ID.format(usuario_id))
     columns_name = [column[0] for column in cursor.description]
     lembrete_cursor = cursor.fetchone()
     while lembrete_cursor:

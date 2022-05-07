@@ -17,6 +17,13 @@ def getAll_lembretes():
 
   return make_response(jsonify(lembretes), 200)
 
+@app_lembretes.route('/{}/<int:usuario_id>'.format(app_name), methods=['GET'])
+def get_lembrete_by_id(usuario_id):
+ 
+  lembretes_by_id = dao.get_lembretes_by_id(usuario_id)
+
+  return make_response(jsonify(lembretes_by_id), 200)
+
 @app_lembretes.route('/{}/adicionar/'.format(app_name), methods=['POST'])
 def add_lembrete():
   data = request.form.to_dict(flat=True)
