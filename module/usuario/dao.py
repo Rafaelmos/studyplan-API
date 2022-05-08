@@ -34,7 +34,7 @@ class UsuarioDao:
     cursor.close()
     return usuarios
 
-  def updade_user(self, usuario_update, id):
+  def update_user(self, usuario_update, id):
     cursor = self.connectDataBase.connect.cursor()
     cursor.execute(SCRIPT_SQL_UPDATE_USER.format(usuario_update.get_values_save()[0], usuario_update.get_values_save()[1], usuario_update.get_values_save()[2], id))
     self.connectDataBase.connect.commit()

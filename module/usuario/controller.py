@@ -82,7 +82,7 @@ def update_usuario(id):
     usuario_update = Usuario(**data)
     for usuario in get_all_usuarios:
       if usuario['id'] == id:
-        dao.updade_user(usuario_update, id)
+        dao.update_user(usuario_update, id)
         return make_response({'message' : 'Dados Atualizados'}, 200)
     
     return make_response(
