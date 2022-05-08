@@ -4,12 +4,15 @@ from connect.bdutil import ConnectDataBase
 from module.usuario.dao import UsuarioDao
 from module.usuario.model import Usuario
 
+from module.agenda.dao import AgendaDao
+
 import traceback
 
 app_usuario = Blueprint("app_usuario", __name__)
 app_name = "usuario"
 
 dao = UsuarioDao(connectDataBase=ConnectDataBase())
+daoAgenda = AgendaDao(connectDataBase=ConnectDataBase())
 
 # Rota para listar todos os usuarios
 @app_usuario.route('/{}s/'.format(app_name), methods=['GET'])
@@ -53,9 +56,12 @@ def get_usuario_by_id(id):
 def add_Usuario():
   data = request.form.to_dict(flat=True)
   usuario = None
+  #agenda = None
   try:
     usuario = Usuario(**data)
     usuario = dao.save(usuario)
+    daoAgenda.save_Agenda(usuario.id)
+    
   except Exception as e:
     print(traceback.format_exc())
     return make_response(

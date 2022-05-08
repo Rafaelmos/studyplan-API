@@ -1,10 +1,8 @@
 import psycopg2
 
-SCRIPT_SQL_INSERT = 'INSERT INTO MATERIAS(materia, area) values(%s, %s) returning id'
+SCRIPT_SQL_INSERT = 'INSERT INTO MATERIAS(materia, area, usuario_id) values(%s, %s, %s) returning id'
 SCRIPT_SQL_SELECT_ALL_MATERIAS = 'SELECT * FROM MATERIAS'
 SCRIPT_SQL_DELETE_ID = 'DELETE FROM MATERIAS WHERE id = {}'
-
-
 
 class MateriaDao:
     def __init__(self, connectDataBase):
@@ -12,7 +10,7 @@ class MateriaDao:
 
     def save_Materia(self, materia):
         cursor = self.connectDataBase.connect.cursor()
-        cursor.execute(SCRIPT_SQL_INSERT, materia.get_values_save_meta())
+        cursor.execute(SCRIPT_SQL_INSERT, materia.get_values_saves_materia())
         id = cursor.fetchone()[0]
         self.connectDataBase.connect.commit()
         cursor.close()

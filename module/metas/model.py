@@ -15,4 +15,4 @@ class Metas:
     return 'Nome: {} - Descrição: {} - Status: {} - Prazo: {} - Agenda: {} - Usuario: {}'.format(self.nome, self.descricao, self.status, self.prazo,self.agenda_id, self.usuario_id)
               
   def get_values_save_meta(self):
-    return [self.nome, self.descricao, self.status,self.prazo, self.agenda_id, self.usuario_id]
+    return [self.nome, self.descricao, self.status, self.prazo, self.agenda_id, self.usuario_id]

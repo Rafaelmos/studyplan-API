@@ -5,6 +5,8 @@ SCRIPT_SQL_SELECT_ALL = 'SELECT * FROM usuario'
 SCRIPT_SQL_UPDATE_USER = """UPDATE usuario SET nome = '{}', senha = '{}', idade = {} WHERE id = {}"""
 SCRIPT_SQL_DELETE_ID = 'DELETE FROM usuario WHERE id = {}'
 
+#SCRIP_SQL_SELECT_ULTIMO_ID = 'SELECT id FROM USUARIO ORDER BY id DESC LIMIT 1'
+
 class UsuarioDao:
   def __init__(self, connectDataBase):
     self.connectDataBase = connectDataBase
@@ -16,9 +18,9 @@ class UsuarioDao:
     self.connectDataBase.connect.commit()
     cursor.close()
     usuario.set_id(id)
+    
     return usuario
   
-
   def get_allUsers(self):
     usuarios = []
     cursor = self.connectDataBase.connect.cursor()

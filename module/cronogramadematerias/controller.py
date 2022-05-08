@@ -20,10 +20,10 @@ def getAll_cronogramas():
 @app_cronogramas.route('/{}/adicionar/'.format(app_name), methods=['POST'])
 def add_cronogramas():
   data = request.form.to_dict(flat=True)
-  cronogramas = None
+  cronograma = None
 
   try:
-    cronograma = cronogramas(**data)
+    cronograma = Cronogramadematerias(**data)
     cronograma = dao.save_cronograma(cronograma)
   except Exception as e:
     print(traceback.format_exc())

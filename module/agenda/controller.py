@@ -49,7 +49,7 @@ def delete_agenda(id):
       dao.delete_agenda(id)
       return make_response(
       { 
-        'message' : 'Agenda ' + agenda['id'] + ' Deletado' 
+        'message' : 'Agenda deletada'
       }, 200)
 
   return make_response(
