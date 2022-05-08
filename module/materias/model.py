@@ -14,3 +14,4 @@ class Materias:
     def get_values_saves_materia(self):
             return [self.materia, self.area, self.usuario_id]
 
+

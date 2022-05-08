@@ -51,3 +51,30 @@ def delete_materia(id):
       'error' : True,
       'message' : 'Erro, A materia não foi encontrada'
     }, 400)    
+
+
+@app_materias.route('/{}/atualizar/<int:id>'.format(app_name), methods=['PUT'])
+def update_metas(id):
+  data = request.form.to_dict(flat=True)
+  get_all_materias = dao.getAll_Materias()
+  
+  try:
+    materia_update = Materias(**data)
+    for meta in get_all_materias:
+      if meta['id'] == id:
+        dao.update_materia(materia_update, id)
+        return make_response({'message' : 'Dados Atualizados'}, 200)
+    
+    return make_response(
+      {
+        'error' : True,
+        'message' : 'Error, Usuário não encontrado'
+      }, 404)
+  
+  except Exception as e:
+    print(traceback.format_exc())
+    return make_response(
+      {
+        'error' : True,
+        'message' : 'Erro, Verifique se os campos foram preenchidos corretamente'
+      }, 400)

@@ -1,8 +1,11 @@
 import psycopg2
 
+from module.metas.dao import SCRIPT_SQL_UPDATE_METAS
+
 SCRIPT_SQL_INSERT = 'INSERT INTO MATERIAS(materia, area, usuario_id) values(%s, %s, %s) returning id'
 SCRIPT_SQL_SELECT_ALL_MATERIAS = 'SELECT * FROM MATERIAS'
 SCRIPT_SQL_DELETE_ID = 'DELETE FROM MATERIAS WHERE id = {}'
+SCRIPT_SQL_UPDATE_MATERIA = """UPDATE Materias SET materia = '{}', area = '{}', usuario_id = {} WHERE id = {}"""
 
 class MateriaDao:
     def __init__(self, connectDataBase):
@@ -34,6 +37,12 @@ class MateriaDao:
     def delete_materia(self, id):
         cursor = self.connectDataBase.connect.cursor()
         cursor.execute(SCRIPT_SQL_DELETE_ID.format(id))
+        self.connectDataBase.connect.commit()
+        cursor.close()
+
+    def update_materia(self, materia_update, id):
+        cursor = self.connectDataBase.connect.cursor()
+        cursor.execute(SCRIPT_SQL_UPDATE_MATERIA.format(materia_update.get_values_saves_materia()[0], materia_update.get_values_saves_materia()[1], materia_update.get_values_saves_materia()[2], id))
         self.connectDataBase.connect.commit()
         cursor.close()
 
