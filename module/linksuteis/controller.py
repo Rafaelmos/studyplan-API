@@ -34,6 +34,30 @@ def add_link():
       }, 400)
   return make_response({'id': link.id}, 200)
 
+@app_links.route('/{}/atualizar/<int:id>'.format(app_name), methods=['PUT'])
+def update_link(id):
+  data = request.form.to_dict(flat=True)
+  get_all_links = dao.getAll_links()
+
+  try:
+    link_update = Linksuteis(**data)
+    for link in get_all_links:
+      if link['id'] == id:
+        dao.update_link(link_update, id)
+        return make_response({'message' : 'Dados Atualizados'}, 200)
+    return make_response(
+      {
+        'error' : True,
+        'message' : 'Error, Link não encontrado'
+      }, 404)
+
+  except Exception as e:
+    print(traceback.format_exc())
+    return make_response(
+      {
+        'error' : True,
+        'message' : 'Erro, Verifique se os campos foram preenchidos corretamente'
+      }, 400)
 
 @app_links.route('/{}/delete/<int:id>'.format(app_name), methods=['DELETE'])
 def delete_Link(id):
