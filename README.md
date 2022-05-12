@@ -17,8 +17,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
  - Psycopg2 <img src="https://img.icons8.com/color-glass/344/stackoverflow.png" width="25px">
 
 ## 🎯 Version das Bibliotecas utilizadas no momento:
-Flask 2.1.1
-psycopg2 2.9.3
+<p>Flask 2.1.1</p>
+ <p>psycopg2 2.9.3</p>
 
 ## 🎓 Cuso:
  - Bacharelado em Sistemas de Informações.
