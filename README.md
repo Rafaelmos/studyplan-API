@@ -20,7 +20,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 <p>Flask 2.1.1</p>
  <p>psycopg2 2.9.3</p>
 
-## 🎓 Cuso:
+## 🎓 Curso:
  - Bacharelado em Sistemas de Informação.
  - UFRPE (UAST) - Serra Talhada.
  - Professor: Heldon José Oliveira.
