@@ -1,4 +1,4 @@
-# ⌛ API desenvolvida para a cadeira: Fundamentos de Banco de Dados
+# ⌛ API desenvolvida para a disciplina: Fundamentos de Banco de Dados
 
 - Nome do Projeto: Studyplan-Organizer-API
 
@@ -21,7 +21,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
  <p>psycopg2 2.9.3</p>
 
 ## 🎓 Cuso:
- - Bacharelado em Sistemas de Informações.
+ - Bacharelado em Sistemas de Informação.
  - UFRPE (UAST) - Serra Talhada.
- - Professor: Heldon José Oliveira
+ - Professor: Heldon José Oliveira.
  - 4º Período.
