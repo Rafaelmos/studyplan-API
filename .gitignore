@@ -10,3 +10,6 @@ module/linksuteis/__pycache__
 module/cronogramadematerias/__pycache__ 
 module/lembretes/__pycache__ 
 api-env/pyvenv.cfg
+module/agenda/__pycache__/controller.cpython-310.pyc
+module/agenda/__pycache__/dao.cpython-310.pyc
+module/agenda/__pycache__/model.cpython-310.pyc
