@@ -6,6 +6,7 @@ SCRIPT_SQL_INSERT = 'INSERT INTO MATERIAS(materia, area, usuario_id) values(%s, 
 SCRIPT_SQL_SELECT_ALL_MATERIAS = 'SELECT * FROM MATERIAS'
 SCRIPT_SQL_DELETE_ID = 'DELETE FROM MATERIAS WHERE id = {}'
 SCRIPT_SQL_SELECT_MATERIA_BY_ID = 'SELECT * FROM materias WHERE usuario_id = {}'
+SCRIPT_SQL_SELECT_MATERIA_BY_AREA = """SELECT * FROM materias WHERE area = '{}'"""
 SCRIPT_SQL_UPDATE_MATERIA = """UPDATE Materias SET materia = '{}', area = '{}', usuario_id = {} WHERE id = {}"""
 
 class MateriaDao:
@@ -39,6 +40,19 @@ class MateriaDao:
     materias = []
     cursor = self.connectDataBase.connect.cursor()
     cursor.execute(SCRIPT_SQL_SELECT_MATERIA_BY_ID.format(usuario_id))
+    columns_name = [column[0] for column in cursor.description]
+    materia_cursor = cursor.fetchone()
+    while materia_cursor:
+      materia = dict(zip(columns_name, materia_cursor))
+      materia_cursor = cursor.fetchone()
+      materias.append(materia)
+    cursor.close()
+    return materias
+
+  def get_materias_by_area(self, area):
+    materias = []
+    cursor = self.connectDataBase.connect.cursor()
+    cursor.execute(SCRIPT_SQL_SELECT_MATERIA_BY_AREA.format(area))
     columns_name = [column[0] for column in cursor.description]
     materia_cursor = cursor.fetchone()
     while materia_cursor:
