@@ -1,10 +1,10 @@
 class Lembretes:
   def __init__(self, nome, descricao, data, agenda_id, usuario_id):
-    self.nome = nome,
-    self.descricao = descricao,
-    self.data = data,
-    self.agenda_id = agenda_id,
-    self.usuario_id = usuario_id,
+    self.nome = nome
+    self.descricao = descricao
+    self.data = data
+    self.agenda_id = agenda_id
+    self.usuario_id = usuario_id
     self.id = None
 
   def set_id(self, id):

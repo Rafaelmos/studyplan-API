@@ -1,11 +1,11 @@
 class Metas:
   def __init__(self, nome, descricao, status, prazo, agenda_id, usuario_id):
-    self.nome = nome,
-    self.descricao = descricao,
-    self.status = status,
-    self.prazo = prazo,
-    self.agenda_id = agenda_id,
-    self.usuario_id = usuario_id,
+    self.nome = nome
+    self.descricao = descricao
+    self.status = status
+    self.prazo = prazo
+    self.agenda_id = agenda_id
+    self.usuario_id = usuario_id
     self.id = None
 
   def set_id(self, id):

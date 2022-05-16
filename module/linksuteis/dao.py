@@ -4,6 +4,9 @@ SCRIPT_SQL_INSERT = 'INSERT INTO LINKSUTEIS(titulo, link, usuario_id) values(%s,
 SCRIPT_SQL_SELECT_ALL_LINKS = 'SELECT * FROM LINKSUTEIS'
 SCRIPT_SQL_DELETE_ID = 'DELETE FROM LINKSUTEIS WHERE id = {}'
 SCRIPT_SQL_UPDATE_LINK = """UPDATE linksuteis SET titulo = '{}', link = '{}', usuario_id = {} WHERE id = {}"""
+SCRIPT_SQL_SELECT_LINK_BY_ID = 'SELECT * FROM linksuteis WHERE usuario_id = {}'
+
+
 
 class LinksDao:
   def __init__(self, connectDataBase):
@@ -31,6 +34,19 @@ class LinksDao:
       links.append(link)
     cursor.close()
 
+    return links
+
+  def get_links_by_id(self, usuario_id):
+    links = []
+    cursor = self.connectDataBase.connect.cursor()
+    cursor.execute(SCRIPT_SQL_SELECT_LINK_BY_ID.format(usuario_id))
+    columns_name = [column[0] for column in cursor.description]
+    link_cursor = cursor.fetchone()
+    while link_cursor:
+      materia = dict(zip(columns_name, link_cursor))
+      link_cursor = cursor.fetchone()
+      links.append(materia)
+    cursor.close()
     return links
 
   def update_link(self, link_update, id):

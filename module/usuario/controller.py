@@ -5,6 +5,7 @@ from module.usuario.dao import UsuarioDao
 from module.usuario.model import Usuario
 
 from module.agenda.dao import AgendaDao
+from module.agenda.model import Agendas
 
 import traceback
 
@@ -56,11 +57,14 @@ def get_usuario_by_id(id):
 def add_Usuario():
   data = request.form.to_dict(flat=True)
   usuario = None
-  #agenda = None
+  agenda = None
+  
   try:
     usuario = Usuario(**data)
     usuario = dao.save(usuario)
-    daoAgenda.save_Agenda(usuario.id)
+
+    agenda = Agendas(usuario.id)
+    agenda = daoAgenda.save_Agenda(agenda)
     
   except Exception as e:
     print(traceback.format_exc())

@@ -7,6 +7,8 @@ SCRIPT_SQL_DELETE_ID = 'DELETE FROM usuario WHERE id = {}'
 
 #SCRIP_SQL_SELECT_ULTIMO_ID = 'SELECT id FROM USUARIO ORDER BY id DESC LIMIT 1'
 
+from module.agenda.dao import AgendaDao
+
 class UsuarioDao:
   def __init__(self, connectDataBase):
     self.connectDataBase = connectDataBase

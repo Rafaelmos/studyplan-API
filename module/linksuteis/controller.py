@@ -17,6 +17,12 @@ def getAll_links():
 
   return make_response(jsonify(links), 200)
 
+@app_links.route('/{}/<int:usuario_id>'.format(app_name, methods=['GET']))
+def get_link_by_id(usuario_id):
+  get_links_by_usuario = dao.get_links_by_id(usuario_id)
+
+  return make_response(jsonify(get_links_by_usuario), 200)
+
 @app_links.route('/{}/adicionar/'.format(app_name), methods=['POST'])
 def add_link():
   data = request.form.to_dict(flat=True)
@@ -68,7 +74,7 @@ def delete_Link(id):
       dao.delete_link(id)
       return make_response(
       { 
-        'message' : 'LinkUtil ' + link['nome'] + ' Deletado' 
+        'message' : 'LinkUtil Deletado' 
       }, 200)
 
   return make_response(

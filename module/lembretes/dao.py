@@ -52,6 +52,7 @@ class LembreteDao:
       cursor.execute(SCRIPT_SQL_DELETE_ID.format(id))
       self.connectDataBase.connect.commit()
       cursor.close()
+
   def update_lembrete(self, lembrete_update, id):
     cursor = self.connectDataBase.connect.cursor()
     cursor.execute(SCRIPT_SQL_UPDATE_LEMBRTETES.format(lembrete_update.get_values_save_lembrete()[0], lembrete_update.get_values_save_lembrete()[1], lembrete_update.get_values_save_lembrete()[2], lembrete_update.get_values_save_lembrete()[3], lembrete_update.get_values_save_lembrete()[4], id))
