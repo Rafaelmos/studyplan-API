@@ -41,6 +41,33 @@ def add_lembrete():
       }, 400)
   return make_response({'id': lembrete.id}, 200)
 
+@app_lembretes.route('/{}/atualizar/<int:id>'.format(app_name), methods=['PUT'])
+def update_lembrete(id):
+  data = request.form.to_dict(flat=True)
+  get_all_lembretes = dao.getAll_lembretes()
+  
+  try:
+    lembrete_update = Lembretes(**data)
+    for lembrete in get_all_lembretes:
+      if lembrete['id'] == id:
+        dao.update_lembrete(lembrete_update, id)
+        return make_response({'message' : 'Dados Atualizados'}, 200)
+    
+    return make_response(
+      {
+        'error' : True,
+        'message' : 'Error, Lembrete não encontrado'
+      }, 404)
+  
+  except Exception as e:
+    print(traceback.format_exc())
+    return make_response(
+      {
+        'error' : True,
+        'message' : 'Erro, Verifique se os campos foram preenchidos corretamente'
+      }, 400)
+
+
 @app_lembretes.route('/{}/delete/<int:id>'.format(app_name), methods=['DELETE'])
 def delete_lembrete(id):
   get_all_lembretes = dao.getAll_lembretes()

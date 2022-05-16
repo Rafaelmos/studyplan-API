@@ -4,6 +4,8 @@ SCRIPT_SQL_INSERT = 'INSERT INTO LEMBRETES(nome, descricao, data, agenda_id, usu
 SCRIPT_SQL_SELECT_ALL_LEMBRETES = 'SELECT * FROM LEMBRETES'
 SCRIPT_SQL_DELETE_ID = 'DELETE FROM LEMBRETES WHERE id = {}'
 SCRIPT_SQUL_SELECT_LEMBRETES_BY_ID = 'SELECT * FROM lembretes WHERE usuario_id = {}'
+SCRIPT_SQL_UPDATE_LEMBRTETES = """UPDATE lembretes SET nome = '{}', descricao = '{}', data = '{}', agenda_id = '{}', usuario_id = '{}'  WHERE id = {}"""
+
 
 class LembreteDao:
   def __init__(self, connectDataBase):
@@ -50,3 +52,8 @@ class LembreteDao:
       cursor.execute(SCRIPT_SQL_DELETE_ID.format(id))
       self.connectDataBase.connect.commit()
       cursor.close()
+  def update_lembrete(self, lembrete_update, id):
+    cursor = self.connectDataBase.connect.cursor()
+    cursor.execute(SCRIPT_SQL_UPDATE_LEMBRTETES.format(lembrete_update.get_values_save_lembrete()[0], lembrete_update.get_values_save_lembrete()[1], lembrete_update.get_values_save_lembrete()[2], lembrete_update.get_values_save_lembrete()[3], lembrete_update.get_values_save_lembrete()[4], id))
+    self.connectDataBase.connect.commit()
+    cursor.close()
