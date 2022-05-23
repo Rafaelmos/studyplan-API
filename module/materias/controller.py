@@ -18,6 +18,18 @@ def getAll_materias():
 
     return make_response(jsonify(materias), 200)
 
+@app_materias.route('/{}/<int:usuario_id>'.format(app_name, methods=['GET']))
+def get_materias_by_id(usuario_id):
+  materias_by_usuario = dao.get_materias_by_id(usuario_id)
+
+  return make_response(jsonify(materias_by_usuario), 200)
+
+@app_materias.route('/{}/<string:area>'.format(app_name, methods=['GET']))
+def get_materias_by_area(area):
+  materias_by_area = dao.get_materias_by_area(area)
+
+  return make_response(jsonify(materias_by_area), 200)
+
 @app_materias.route(f'/{app_name}/adicionar/', methods=['POST'])
 def add_materia():
     data = request.form.to_dict(flat=True)
