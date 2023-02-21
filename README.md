@@ -3,7 +3,7 @@
 - Nome do Projeto: Studyplan-Organizer-API
 
 ## 💻 Sobre o projeto:
-- O projeto constitui em um API que irá cadastrar matérias e organizar em um banco de dados de estudos afim de ajudar o usuario estudar no seu contidiano. Incluindo outras funcionalidades como: links uteis, metas e lembretes.
+- O projeto consiste em uma API que irá cadastrar matérias e organizar em um banco de dados de estudos a fim de ajudar o usuário a estudar no seu cotidiano. Incluindo outras funcionalidades como: links úteis, metas e lembretes..
 
 ## 💭 Projeto em DAO:
  - A arquitetura DAO utilizar uma pasta MODELO onde terá o MODEL, Controler e o DAO de cada parte do projeto, separadas por pastas que cada tabela terá.
